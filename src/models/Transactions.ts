@@ -11,36 +11,36 @@ export interface TransactionsInstance extends Model {
 }
 
 const Transactions = sequelize.define<TransactionsInstance>('Transactions', {
-    id: {
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    value: {
-      type: DataTypes.DECIMAL,
-      allowNull: false
-    },
-    debitedAccountId:{
-      type: DataTypes.INTEGER,
-      references: {
-        model: Accounts,
-        key: 'id'
-      }
-    },
-    creditedAccountId:{
-      type: DataTypes.INTEGER,
-      references: {
-        model: Accounts,
-        key: 'id'
-      }
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
+  id: {
+    primaryKey: true,
+    autoIncrement: true,
+    type: DataTypes.INTEGER
+  },
+  value: {
+    type: DataTypes.DECIMAL,
+    allowNull: false
+  },
+  debitedAccountId:{
+    type: DataTypes.INTEGER,
+    references: {
+      model: Accounts,
+      key: 'id'
     }
+  },
+  creditedAccountId:{
+    type: DataTypes.INTEGER,
+    references: {
+      model: Accounts,
+      key: 'id'
+    }
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false
+  }
 }, {
-    tableName: 'Transactions',
-    timestamps: false
+  tableName: 'Transactions',
+  timestamps: false
 });
 
 Transactions.sync({force: false});

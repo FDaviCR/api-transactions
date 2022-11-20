@@ -1,10 +1,14 @@
 import { Router } from 'express';
 
+import * as LoginController from '../controllers/LoginController';
 import * as UserController from '../controllers/UserController';
 import * as AccountController from '../controllers/AccountController';
 import * as TransactionController from '../controllers/TransactionController';
 
 const router = Router();
+
+// Endpoint de Login
+router.post('/login', LoginController.login);
 
 // Endpoints de Usuários
 router.post('/users', UserController.create);

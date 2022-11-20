@@ -7,18 +7,18 @@ export interface AccountsInstance extends Model {
 }
 
 const Accounts = sequelize.define<AccountsInstance>('Accounts', {
-    id: {
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    balance: {
-      type: DataTypes.DECIMAL,
-      allowNull: false
-    }
+  id: {
+    primaryKey: true,
+    autoIncrement: true,
+    type: DataTypes.INTEGER
+  },
+  balance: {
+    type: DataTypes.DECIMAL,
+    allowNull: false
+  }
 }, {
-    tableName: 'Accounts',
-    timestamps: false
+  tableName: 'Accounts',
+  timestamps: false
 });
 
 Accounts.sync({force: false});
