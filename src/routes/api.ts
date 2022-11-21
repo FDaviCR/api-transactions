@@ -5,6 +5,8 @@ import * as UserController from '../controllers/UserController';
 import * as AccountController from '../controllers/AccountController';
 import * as TransactionController from '../controllers/TransactionController';
 
+import { authorization } from '../functions/auth';
+
 const router = Router();
 
 // Endpoint de Login
@@ -15,7 +17,7 @@ router.post('/users', UserController.create);
 router.put('/users/:code', UserController.update);
 router.delete('/users/:code', UserController.destroy);
 router.get('/users/:code', UserController.read);
-router.get('/users', UserController.list);
+router.get('/users', authorization, UserController.list);
 
 // Endpoints de Saldo
 router.post('/accounts', AccountController.create);
