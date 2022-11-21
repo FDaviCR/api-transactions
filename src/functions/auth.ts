@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 dotenv.config();

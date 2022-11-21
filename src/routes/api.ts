@@ -14,9 +14,6 @@ router.post('/login', LoginController.login);
 
 // Endpoints de Usuários
 router.post('/users', UserController.create);
-router.put('/users/:code', UserController.update);
-router.delete('/users/:code', UserController.destroy);
-router.get('/users/:code', UserController.read);
 router.get('/users', authorization, UserController.list);
 
 // Endpoints de Saldo
@@ -29,8 +26,6 @@ router.get('/accounts', AccountController.list);
 // Endpoints de Transações
 router.post('/transactions', TransactionController.create);
 router.put('/transactions/:code', TransactionController.update);
-router.delete('/transactions/:code', TransactionController.destroy);
 router.get('/transactions/:code', TransactionController.read);
-router.get('/transactions', TransactionController.list);
 
 export default router;

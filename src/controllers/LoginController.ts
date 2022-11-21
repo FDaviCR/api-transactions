@@ -30,7 +30,3 @@ export const login = async (req: Request, res: Response) => {
     }
   });
 }
-
-export const verify = async (req: Request, res: Response) => {
-
-}

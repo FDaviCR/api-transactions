@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const Users = require('../models/Users');
 const Accounts = require('../models/Accounts');
-const Check = require('../functions/index');
+const Check = require('../functions/check');
 
 export const list = async (req: Request, res: Response) => {
   let users = await Users.findAll();
@@ -54,10 +54,3 @@ export const create = async (req: Request, res: Response) => {
   }
   
 }
-
-export const update = async (req: Request, res: Response) => {
-  
-}
-
-export const read = async (req: Request, res: Response) => {}
-export const destroy = async (req: Request, res: Response) => {}
