@@ -1,21 +1,25 @@
 import { Request, Response } from 'express';
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+const jwt = require('jsonwebtoken');
+
+const Users = require('../models/Users');
 const Accounts = require('../models/Accounts');
 
-export const list = async (req: Request, res: Response) => {
-  let accounts = await Accounts.findAll();
+export const read = async (req: Request, res: Response) => {
+  const authToken = req.headers['authorization'];
+  jwt.verify(authToken, process.env.SECRET_KEY, async(err:any, data:any) => {
+    const user = await Users.findOne({
+      where: { username: data.username }
+    });
 
-  res.status(200);
-  res.json({ accounts });
+    const account = await Accounts.findOne({
+      where: { id: user.AccountId }
+    });
+
+    res.status(200);
+    res.json({ balance: account.balance});
+  })
 }
-
-export const create = async (req: Request, res: Response) => {
-  
-}
-
-export const update = async (req: Request, res: Response) => {
-  
-}
-
-export const read = async (req: Request, res: Response) => {}
-export const destroy = async (req: Request, res: Response) => {}

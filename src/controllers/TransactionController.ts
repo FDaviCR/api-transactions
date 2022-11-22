@@ -71,8 +71,4 @@ export const create = async (req: Request, res: Response) => {
 
 }
 
-export const update = async (req: Request, res: Response) => {
-  
-}
-
 export const read = async (req: Request, res: Response) => {}
