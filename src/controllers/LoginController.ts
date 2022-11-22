@@ -21,12 +21,13 @@ export const login = async (req: Request, res: Response) => {
           res.status(200);
           res.json({token:token});
         }else{
-          res.json({message:'Senha errada!'});
+          res.status(200);
+          res.json({message:'Usuário ou senha errada!'});
         }
 
     }else{
       res.status(200);
       res.json({message:'Usuário não encontrado!'});
     }
-  });
+  })
 }

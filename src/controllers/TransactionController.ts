@@ -26,7 +26,37 @@ export const create = async (req: Request, res: Response) => {
         })
 
         if(account.balance >= value){
+          const cashinUser = await Users.findOne({
+            where: { username: username }
+          });
 
+          if(cashinUser != undefined){
+            await Transactions.create({
+              value:value,
+              debitedAccountId: user.AccountId,
+              creditedAccountId: cashinUser.AccountId,
+              createdAt: Date.now()
+            }).then(async () => {
+              await Accounts.update({balance: parseFloat(account.balance) - value}, {
+                where: {id: account.id}
+              }).then(async ()=>{
+                const accountCashIn = await Accounts.findOne({
+                  where: { id: cashinUser.AccountId }
+                })
+                await Accounts.update({balance: parseFloat(accountCashIn.balance) + value}, {
+                  where: {id: accountCashIn.id}
+                })
+
+                res.status(200);
+                res.json({message: 'Transação concluida!'})
+              }).catch((err:any)=>{
+                console.log(err);
+                res.status(400).send({message: 'Ocorreu um erro, a transação foi cancelada!'})
+              })
+            })
+          }else{
+            res.status(200).send({message:'O destinatario não existe!'});
+          }
         }else{
           res.status(200).send({message:'O usuário não possui saldo suficiente para a transação!'});
         }
