@@ -16,11 +16,11 @@ router.post('/login', LoginController.login);
 router.post('/users', UserController.create);
 router.get('/users', authorization, UserController.list);
 
-// Endpoints de Saldo
-router.get('/accounts', AccountController.read);
+// Endpoint de Saldo
+router.get('/accounts', authorization, AccountController.read);
 
 // Endpoints de Transações
-router.post('/transactions', TransactionController.create);
-router.get('/transactions/:code', TransactionController.read);
+router.post('/transactions', authorization, TransactionController.create);
+router.get('/transactions', authorization, TransactionController.read);
 
 export default router;

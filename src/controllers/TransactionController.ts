@@ -9,6 +9,8 @@ const Users = require('../models/Users');
 const Accounts = require('../models/Accounts');
 const Transactions = require('../models/Transactions');
 
+const { Op } = require("sequelize");
+
 export const create = async (req: Request, res: Response) => {
   let username: string = req.body.username;
   let value: number = req.body.value;
@@ -71,4 +73,22 @@ export const create = async (req: Request, res: Response) => {
 
 }
 
-export const read = async (req: Request, res: Response) => {}
+export const read = async (req: Request, res: Response) => {
+  const authToken = req.headers['authorization'];
+  jwt.verify(authToken, process.env.SECRET_KEY, async(err:any, data:any) => {
+    const user = await Users.findOne({
+      where: { id: data.id }
+    });
+    const transactions = await Transactions.findAll({
+      where: {
+        [Op.or]: [
+          { debitedAccountId: user.AccountId },
+          { creditedAccountId: user.AccountId }
+        ]
+      }
+    });
+
+    res.status(200);
+    res.json({ transactions });
+  })
+}
