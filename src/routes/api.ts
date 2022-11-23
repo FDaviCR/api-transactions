@@ -17,7 +17,7 @@ router.post('/users', UserController.create);
 router.get('/users', authorization, UserController.list);
 
 // Endpoint de Saldo
-router.get('/accounts', authorization, AccountController.read);
+router.get('/accounts', authorization, AccountController.getBalance);
 
 // Endpoints de Transações
 router.post('/transactions', authorization, TransactionController.create);

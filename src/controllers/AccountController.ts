@@ -8,11 +8,10 @@ const jwt = require('jsonwebtoken');
 const Users = require('../models/Users');
 const Accounts = require('../models/Accounts');
 
-export const read = async (req: Request, res: Response) => {
-  const authToken = req.headers['authorization'];
-  jwt.verify(authToken, process.env.SECRET_KEY, async(err:any, data:any) => {
+export const getBalance = async (req: Request, res: Response) => {
+  try{
     const user = await Users.findOne({
-      where: { username: data.username }
+      where: { id: res.locals.userId }
     });
 
     const account = await Accounts.findOne({
@@ -21,5 +20,8 @@ export const read = async (req: Request, res: Response) => {
 
     res.status(200);
     res.json({ balance: account.balance});
-  })
+  }catch (error) {
+    res.status(400);
+    console.log(error);
+  }
 }

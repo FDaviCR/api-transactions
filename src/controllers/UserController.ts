@@ -52,5 +52,4 @@ export const create = async (req: Request, res: Response) => {
     res.status(400);
     console.log(error);
   }
-  
 }

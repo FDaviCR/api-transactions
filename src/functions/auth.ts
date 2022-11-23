@@ -14,6 +14,7 @@ export const authorization = async (req: Request, res: Response, next: NextFunct
         res.status(401);
         res.json({err:"Token inválido!"});
       }else{
+        res.locals.userId = data.id;
         next();
       }
     });
