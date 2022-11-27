@@ -1,9 +1,4 @@
 import { Request, Response } from 'express';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const jwt = require('jsonwebtoken');
 
 const Users = require('../models/Users');
 const Accounts = require('../models/Accounts');

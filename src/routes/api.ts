@@ -21,6 +21,6 @@ router.get('/accounts', authorization, AccountController.getBalance);
 
 // Endpoints de Transações
 router.post('/transactions', authorization, TransactionController.create);
-router.get('/transactions', authorization, TransactionController.read);
+router.get('/transactions', authorization, TransactionController.getAllTransactions);
 
 export default router;
